@@ -134,7 +134,7 @@ SPE.Group = function( options ) {
         },
         fogColor: {
             type: 'c',
-            value: null
+            value: new THREE.Color( 0xffffff )
         },
         fogNear: {
             type: 'f',
