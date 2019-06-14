@@ -1932,7 +1932,7 @@ SPE.Group = function( options ) {
         },
         fogColor: {
             type: 'c',
-            value: new THREE.Color( 0xffffff )
+            value: new THREE.Color()
         },
         fogNear: {
             type: 'f',
