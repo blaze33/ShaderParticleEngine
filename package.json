@@ -37,6 +37,6 @@
     "example": "examples"
   },
   "dependencies": {
-    "three": "^0.105.0"
+    "three": "^0.106.0"
   }
 }
