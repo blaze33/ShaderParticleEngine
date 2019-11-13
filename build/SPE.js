@@ -439,7 +439,7 @@ SPE.ShaderAttribute = function( type, dynamicBuffer, arrayType ) {
 	this.arrayType = arrayType || Float32Array;
 	this.typedArray = null;
 	this.bufferAttribute = null;
-	this.dynamicBuffer = !!dynamicBuffer;
+	this.usage = !!dynamicBuffer ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage;
 
 	this.updateMin = 0;
 	this.updateMax = 0;
@@ -540,7 +540,7 @@ SPE.ShaderAttribute.prototype.resetUpdateRange = function() {
 
 SPE.ShaderAttribute.prototype.resetDynamic = function() {
 	'use strict';
-	this.bufferAttribute.dynamic = this.dynamicBuffer;
+	this.bufferAttribute.usage = this.usage;
 };
 
 /**
@@ -564,7 +564,7 @@ SPE.ShaderAttribute.prototype.forceUpdateAll = function() {
 	this.bufferAttribute.array = this.typedArray.array;
 	this.bufferAttribute.updateRange.offset = 0;
 	this.bufferAttribute.updateRange.count = -1;
-	this.bufferAttribute.dynamic = false;
+	this.bufferAttribute.usage = THREE.StaticDrawUsage;
 	this.bufferAttribute.needsUpdate = true;
 };
 
@@ -633,7 +633,7 @@ SPE.ShaderAttribute.prototype._createBufferAttribute = function( size ) {
 	}
 
 	this.bufferAttribute = new THREE.BufferAttribute( this.typedArray.array, this.componentSize );
-	this.bufferAttribute.dynamic = this.dynamicBuffer;
+	this.bufferAttribute.usage = this.usage;
 };
 
 /**
@@ -2082,7 +2082,7 @@ SPE.Group.prototype._applyAttributesToGeometry = function() {
 
             // // Add the attribute to the geometry if it doesn't already exist.
             else {
-                geometry.addAttribute( attr, attribute.bufferAttribute );
+                geometry.setAttribute( attr, attribute.bufferAttribute );
             }
 
             // Mark the attribute as needing an update the next time a frame is rendered.
@@ -2293,9 +2293,9 @@ SPE.Group.prototype.getFromPool = function() {
     }
     else if ( createNew ) {
         var emitter = new SPE.Emitter( this._poolCreationSettings );
-        
+
         this.addEmitter( emitter );
-        
+
         return emitter;
     }
 
