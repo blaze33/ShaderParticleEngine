@@ -284,7 +284,7 @@ SPE.Group.prototype._applyAttributesToGeometry = function() {
 
             // // Add the attribute to the geometry if it doesn't already exist.
             else {
-                geometry.addAttribute( attr, attribute.bufferAttribute );
+                geometry.setAttribute( attr, attribute.bufferAttribute );
             }
 
             // Mark the attribute as needing an update the next time a frame is rendered.
@@ -495,9 +495,9 @@ SPE.Group.prototype.getFromPool = function() {
     }
     else if ( createNew ) {
         var emitter = new SPE.Emitter( this._poolCreationSettings );
-        
+
         this.addEmitter( emitter );
-        
+
         return emitter;
     }
 
