@@ -9,7 +9,7 @@ SPE.shaderChunks = {
     uniforms: [
         'uniform float deltaTime;',
         'uniform float runTime;',
-        'uniform sampler2D texture;',
+        'uniform sampler2D u_texture;',
         'uniform vec4 textureAnimation;',
         'uniform float scale;',
     ].join( '\n' ),
@@ -250,6 +250,6 @@ SPE.shaderChunks = {
         '    #endif',
 
         '',
-        '    vec4 rotatedTexture = texture2D( texture, vUv );',
+        '    vec4 rotatedTexture = texture2D( u_texture, vUv );',
     ].join( '\n' )
 };
